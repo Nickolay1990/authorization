@@ -16,11 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from TestTaskFS.views import login, registration
+from TestTaskFS.views import login, registration, index
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', login, name='index'),
+    path('', index, name='index'),
     path('login/', login, name='login_page'),
     path('register/', registration, name='register_page')
 ]

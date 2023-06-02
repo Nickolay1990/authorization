@@ -22,7 +22,7 @@ def login(request):
                            'url_link_name': 'register_page'})
 
 
-def registration(request):
+def registration(request) -> object:
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         form.check_valid()
@@ -44,4 +44,9 @@ def registration(request):
 
 def success(request, form):
     return render(request, 'TestTaskFS/success.html',
-                  context={'form': form, 'title': 'Success', 'url_login': 'login_page', 'url_register': 'register_page'})
+                  context={'form': form, 'title': 'Success', 'url_login': 'login_page',
+                           'url_register': 'register_page'})
+
+
+def index(request):
+    return render(request, 'TestTaskFS/base.html', context={'title': 'Index page'})
