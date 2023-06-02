@@ -1,0 +1,7 @@
+{% extends 'TestTaskFS/base.html' %}
+
+{% block content %}
+    <h1 class="title-string">Successful {{ form }}</h1>
+    <a class="link-for-redirect" href="{% url url_login %}">Login</a>
+    <a class="link-for-redirect" href="{% url url_register %}">Registration</a>
+{% endblock %}
