@@ -20,7 +20,7 @@ from TestTaskFS.views import login, registration
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('/', login, name='index'),
+    path('', login, name='index'),
     path('login/', login, name='login_page'),
     path('register/', registration, name='register_page')
 ]
