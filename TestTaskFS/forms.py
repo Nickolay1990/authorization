@@ -3,29 +3,41 @@ import re
 
 
 class LoginForm(forms.Form):
-    name = forms.CharField(max_length=16, min_length=8, widget=forms.TextInput, label='Login')
-    password = forms.CharField(max_length=16, min_length=8, widget=forms.PasswordInput, label='Password')
+    name = forms.CharField(min_length=4,
+                           widget=forms.TextInput(attrs={'placeholder': 'min 4 symbols and without space'}),
+                           label='Login')
+    password = forms.CharField(min_length=4,
+                               widget=forms.PasswordInput(attrs={'placeholder': 'min 4 symbols and without space'}),
+                               label='Password')
 
     def check_valid(self):
         self.check_valid_name()
         self.check_valid_password()
 
     def check_valid_name(self):
-        if 16 >= len(self.data['name']) >= 8 and self.data['name'].isalnum():
+        check_slash = self.data['name'].replace('_', '')
+        if len(self.data['name']) >= 4 and check_slash.isalnum():
             return True
-        self.add_error('name', 'Login is invalid. Login must contain 8 - 16 letters or numbers.')
+        self.add_error('name', 'Login is invalid. Login must contain minimum 4 only letters or numbers.')
 
     def check_valid_password(self):
-        if 16 >= len(self.data['password']) >= 8:
+        check_slash = self.data['password'].replace('_', '')
+        if len(self.data['password']) >= 4 and check_slash.isalnum():
             return True
-        self.add_error('password', 'Password is invalid. Password must contain 8 - 16 characters.')
+        self.add_error('password', 'Password is invalid. Password must contain minimum 4 only letters or numbers.')
 
 
 class RegisterForm(forms.Form):
-    name = forms.CharField(label='Login', widget=forms.TextInput(), max_length=16, min_length=8)
+    name = forms.CharField(label='Login',
+                           widget=forms.TextInput(attrs={'placeholder': 'min 4 symbols and without space'}),
+                           min_length=4)
     email = forms.EmailField(label='Email', widget=forms.EmailInput())
-    password1 = forms.CharField(label='Password', widget=forms.PasswordInput(), max_length=16, min_length=8)
-    password2 = forms.CharField(label='Confirm password', widget=forms.PasswordInput(), max_length=16, min_length=8)
+    password1 = forms.CharField(label='Password',
+                                widget=forms.PasswordInput(attrs={'placeholder': 'min 4 symbols and without space'}),
+                                min_length=4)
+    password2 = forms.CharField(label='Confirm password',
+                                widget=forms.PasswordInput(attrs={'placeholder': 'min 4 symbols and without space'}),
+                                min_length=4)
 
     def check_valid(self):
         self.check_valid_name()
@@ -34,9 +46,10 @@ class RegisterForm(forms.Form):
         self.check_confirm_password()
 
     def check_valid_name(self):
-        if 16 >= len(self.data['name']) >= 8 and self.data['name'].isalnum():
+        check_slash = self.data['name'].replace('_', '')
+        if len(self.data['name']) >= 4 and check_slash.isalnum():
             return True
-        self.add_error('name', 'Login is invalid. Login must contain 8 - 16 letters or numbers.')
+        self.add_error('name', 'Login is invalid. Login must contain minimum 4 only letters or numbers.')
 
     def check_valid_email(self):
         regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b'
@@ -45,9 +58,10 @@ class RegisterForm(forms.Form):
         self.add_error('email', 'Email is invalid')
 
     def check_valid_password(self):
-        if 16 >= len(self.data['password1']) >= 8:
+        check_slash = self.data['name'].replace('_', '')
+        if len(self.data['password1']) >= 4 and check_slash.isalnum():
             return True
-        self.add_error('password2', 'Password is invalid. Password must contain 8 - 16 characters.')
+        self.add_error('password2', 'Password is invalid. Password must contain minimum 4 only letters or numbers.')
 
     def check_confirm_password(self):
         if self.data['password1'] == self.data['password2']:

@@ -8,6 +8,7 @@ ul {
 
 input {
     width: 100%;
+    font-size: 13px;
 }
 
 .container {
@@ -65,6 +66,7 @@ input {
 
 .span-for-input {
     width: 200px;
+    display: flex;
 }
 
 .div-for-button {

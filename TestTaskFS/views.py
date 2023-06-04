@@ -6,6 +6,9 @@ from TestTaskFS.models import UserModel
 def login(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
+        for f in form:
+            if f.widget_type == 'password':
+                print(f.name)
         form.check_valid()
         if not form.errors:
             try:
